@@ -12,6 +12,7 @@ app = FastAPI()
 stored_data = {}
 previous_data = {}
 
+
 API_URL = os.getenv("API_URL")  # Should point to your own API URL (e.g., http://localhost:8000 or your deployed url)
 
 def is_empty(data):
