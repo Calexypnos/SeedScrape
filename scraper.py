@@ -13,6 +13,9 @@ async def scrape_and_send():
         page = await browser.new_page()
         await page.goto("https://growagardenvalues.com/stock/stocks.php", timeout=60000)
         await page.wait_for_selector(".stock-sections-grid", timeout=10000)
+        await page.wait_for_selector(".stock-item", timeout=10000)
+        await page.wait_for_selector(".item-name", timeout=10000)
+        await page.wait_for_selector(".item-quantity", timeout=10000)
         html = await page.content()
         await browser.close()
 
