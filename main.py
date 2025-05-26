@@ -1,5 +1,7 @@
+import os
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse
+import uvicorn
 
 app = FastAPI()
 
@@ -13,14 +15,11 @@ def is_empty(data):
 async def upload(request: Request):
     global stored_data, previous_data
     new_data = await request.json()
-
-    # Only update if new data is not empty
     if not is_empty(new_data):
         previous_data = stored_data.copy()
         stored_data.update({
             k: v if v else stored_data.get(k, []) for k, v in new_data.items()
         })
-
     return {"status": "success", "received_items": len(new_data)}
 
 @app.get("/api/data", response_class=JSONResponse)
@@ -61,3 +60,7 @@ async def view_data():
     </html>
     """
     return HTMLResponse(content=html)
+
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
