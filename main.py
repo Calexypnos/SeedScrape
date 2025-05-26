@@ -6,17 +6,17 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from playwright.async_api import async_playwright
 from bs4 import BeautifulSoup
 import os
-
-app = FastAPI()
+from contextlib import asynccontextmanager
 
 stored_data = {}
 previous_data = {}
 
-
-API_URL = os.getenv("https://garden-stock-api-production.up.railway.app/")  # Should point to your own API URL (e.g., http://localhost:8000 or your deployed url)
+API_URL = os.getenv("API_URL")  # Make sure to set this in your environment (e.g. "https://garden-stock-api-production.up.railway.app")
 
 def is_empty(data):
     return not any(data.values())
+
+app = FastAPI()  # We'll override this below with lifespan
 
 @app.post("/api/upload")
 async def upload(request: Request):
@@ -108,7 +108,6 @@ async def scrape_and_send():
 
         print("Scraped data:", json.dumps(data, indent=4))
 
-        # Post scraped data to your own API upload endpoint
         async with aiohttp.ClientSession() as session:
             async with session.post(f"{API_URL}/api/upload", json=data) as resp:
                 resp_json = await resp.json()
@@ -120,11 +119,14 @@ async def scrape_and_send():
 async def periodic_scrape():
     while True:
         await scrape_and_send()
-        await asyncio.sleep(10)  # Run every 10 seconds
+        await asyncio.sleep(10)  # every 10 seconds
 
-@app.on_event("startup")
-async def startup_event():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
     if not API_URL:
         print("Warning: API_URL env var not set, scraper will NOT run.")
     else:
         asyncio.create_task(periodic_scrape())
+    yield
+
+app = FastAPI(lifespan=lifespan)
