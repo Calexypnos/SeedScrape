@@ -73,9 +73,19 @@ async def scrape_and_send():
     try:
         async with async_playwright() as p:
             browser = await p.chromium.launch(headless=True)
-            page = await browser.new_page()
+            context = await browser.new_context()
+            page = await context.new_page()
+
+            print("Navigating to stock page...")
             await page.goto("https://growagardenvalues.com/stock/stocks.php", timeout=60000)
-            await page.wait_for_selector(".stock-sections-grid", timeout=10000)
+            
+            # Wait until at least one stock item is visible (JS-rendered)
+            await page.wait_for_selector(".stock-sections-grid", timeout=15000)
+            await page.wait_for_selector(".stock-item", timeout=15000)
+
+            # Wait for network to be idle (optional but helpful for full JS render)
+            await page.wait_for_load_state("networkidle")
+
             html = await page.content()
             await browser.close()
 
@@ -104,13 +114,12 @@ async def scrape_and_send():
 
         print("Scraped data:", json.dumps(data, indent=4))
 
-        if API_URL:
-            async with aiohttp.ClientSession() as session:
-                async with session.post(f"{API_URL}/api/upload", json=data) as resp:
-                    resp_json = await resp.json()
-                    print("Server response:", resp_json)
-        else:
-            print("API_URL not set. Skipping upload.")
+        # Post scraped data to your own API upload endpoint
+        async with aiohttp.ClientSession() as session:
+            print("Posting to:", f"{API_URL}/api/upload")
+            async with session.post(f"{API_URL}/api/upload", json=data) as resp:
+                resp_json = await resp.json()
+                print("Server response:", resp_json)
 
     except Exception as e:
         print("Error during scraping:", e)
