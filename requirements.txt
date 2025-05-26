@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+nest_asyncio
+aiohttp
+beautifulsoup4
+playwright
