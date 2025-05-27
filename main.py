@@ -164,7 +164,7 @@ async def view_data():
                 h1 {{padding:0px; margin-top:0px; margin-bottom:5px; font-size: 1.4em;}}
                 .weather {{ font-size: 1.2em; margin-bottom: 5px; }}
                 .container {{ display: flex; justify-content: space-around; flex-wrap: wrap; }}
-                .column {{ border: 1px solid #ccc; width: 32%;; min-height: 100px; }}
+                .column {{ border: 1px solid #ccc; width: 28%;; min-height: 100px; }}
                 .column h2 {{ text-align: center; margin-bottom: 5px; }}
                 .item {{ display: flex; justify-content: space-between; margin-bottom: 3px; }}
                 .item span {{ font-size: 1em; }}
