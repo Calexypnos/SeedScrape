@@ -150,8 +150,8 @@ async def view_data():
             return f"<div class='column'><h2>{title}</h2>{rows}</div>"
 
         weather_html = (
-            f"<div class='weather'>🌤️ Weather: {weather_data.get('weatherType', 'Unknown')} - {weather_data.get('description', '')}</div>"
-            if weather_data else "<div class='weather'>Weather: loading...</div>"
+            f"<div class='weather'><b>🌤️ Weather: {weather_data.get('weatherType', 'Unknown')} - {weather_data.get('description', '')}</div>"
+            if weather_data else "<div class='weather'>Weather: loading...<b></div>"
         )
 
         html = f"""
@@ -164,10 +164,10 @@ async def view_data():
                 h1 {{padding:0px; margin-top:5px; font-size: 1.4em;}}
                 .weather {{ font-size: 1.2em; margin-bottom: 5px; }}
                 .container {{ display: flex; justify-content: space-around; flex-wrap: wrap; }}
-                .column {{ border: 1px solid #ccc; width: 28%;; min-height: 100px; }}
-                .column h2 {{ text-align: center; margin-bottom: 5px; }}
+                .column {{ border: 2px solid #ccc; width: 30%;; min-height: 100px; }}
+                .column h2 {{ text-align: center; padding:none; margin-top:5px; margin-bottom: 5px; }}
                 .item {{ display: flex; justify-content: space-between; margin-bottom: 3px; }}
-                .item span {{ font-size: 1em; }}
+                .item span {{ font-size: 1em; font-family: "Lucida Console", Monaco, monospace; }}
             </style>
         </head>
         <body>
