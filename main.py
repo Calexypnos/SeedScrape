@@ -159,12 +159,12 @@ async def view_data():
         <html>
         <head>
             <style>
-                body {{ font-family: Arial, sans-serif; padding: 10px; text-align: center; }}
-                .weather {{ font-size: 1.2em; margin-bottom: 20px; }}
+                body {{ font-family: Arial, sans-serif; padding: 3px; text-align: center; }}
+                .weather {{ font-size: 1.2em; margin-bottom: 3px; }}
                 .container {{ display: flex; justify-content: space-around; flex-wrap: wrap; }}
-                .column {{ border: 1px solid #ccc; padding: 15px; width: 20%; margin: 10px; min-height: 100px; }}
-                .column h2 {{ text-align: center; margin-bottom: 10px; }}
-                .item {{ display: flex; justify-content: space-between; margin-bottom: 8px; padding: 5px; }}
+                .column {{ border: 1px solid #ccc; padding: 5px; width: 20%;; min-height: 100px; }}
+                .column h2 {{ text-align: center; margin-bottom: 5px; }}
+                .item {{ display: flex; justify-content: space-between; margin-bottom: 5px; padding: 3px; }}
                 .item span {{ font-size: 1.1em; }}
             </style>
         </head>
