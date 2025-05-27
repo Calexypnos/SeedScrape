@@ -167,7 +167,7 @@ async def view_data():
                 .column {{ border: 1px solid #ccc; width: 50%;; min-height: 100px; }}
                 .column h2 {{ text-align: center; margin-bottom: 5px; }}
                 .item {{ display: flex; justify-content: space-between; margin-bottom: 5px; }}
-                .item span {{ font-size: 1.5em; }}
+                .item span {{ font-size: 1.2em; }}
             </style>
         </head>
         <body>
