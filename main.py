@@ -165,7 +165,7 @@ async def view_data():
                 .weather {{ font-size: 1.2em; margin-bottom: 5px; }}
                 .container {{ display: flex; justify-content: space-around; flex-wrap: wrap; }}
                 .column {{ border: 2px solid #ccc; width: 30%;; min-height: 100px; }}
-                .column h2 {{ text-align: center; padding:none; margin-top:5px; margin-bottom: 5px; }}
+                .column h2 {{ text-align: center; padding:none; margin-bottom: 5px; }}
                 .item {{ display: flex; justify-content: space-between; margin-bottom: 3px; }}
                 .item span {{ font-size: 1em; font-family: "Lucida Console", Monaco, monospace; }}
             </style>
