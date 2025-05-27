@@ -161,7 +161,7 @@ async def view_data():
             <style>
                 body {{ font-family: Arial, sans-serif; text-align: center;}}
                 body::-webkit-scrollbar {{display: none;}}
-                h1 {{padding:0px; margin-top:0px; margin-bottom:5px; font-size: 1.4em;}}
+                h1 {{padding:0px; margin-top:5px; font-size: 1.4em;}}
                 .weather {{ font-size: 1.2em; margin-bottom: 5px; }}
                 .container {{ display: flex; justify-content: space-around; flex-wrap: wrap; }}
                 .column {{ border: 1px solid #ccc; width: 28%;; min-height: 100px; }}
@@ -171,13 +171,13 @@ async def view_data():
             </style>
         </head>
         <body>
-            <h1>Garden Stock</h1>
             {weather_html}
             <div class="container">
                 {render_column("Seeds", data.get("seeds", []))}
                 {render_column("Gear", data.get("gears", []))}
                 {render_column("Eggs", data.get("eggs", []))}
             </div>
+            <h1>Grow a Garden Stock by Calexypnos</h1>
         </body>
         </html>
         """
