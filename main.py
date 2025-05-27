@@ -234,9 +234,13 @@ async def scrape_and_send():
 
                 print("Fetched and parsed stock data:", json.dumps(processed_data, indent=2))
 
-                async with session.post(f"{API_URL}/api/upload", json=processed_data) as resp:
-                    resp_json = await resp.json()
-                    print("Upload response:", json.dumps(resp_json, indent=2))
+                global stored_data, previous_data
+                if any(processed_data.get(k) for k in ["gears", "seeds", "eggs"]):
+                    previous_data = stored_data.copy()
+                    stored_data.clear()
+                    stored_data.update(processed_data)
+                    print("Updated stored_data directly (no POST):", json.dumps(stored_data, indent=2))
+
 
     except Exception as e:
         print("Error during stock fetch/send:", traceback.format_exc())
