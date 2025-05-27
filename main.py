@@ -159,7 +159,7 @@ async def view_data():
         <html>
         <head>
             <style>
-                body {{ font-family: Arial, sans-serif; padding: 3px; text-align: center; }}
+                body {{ font-family: Arial, sans-serif; padding: 3px; text-align: center; overflow: hidden;}}
                 .weather {{ font-size: 1.2em; margin-bottom: 3px; }}
                 .container {{ display: flex; justify-content: space-around; flex-wrap: wrap; }}
                 .column {{ border: 1px solid #ccc; padding: 5px; width: 20%;; min-height: 100px; }}
